@@ -1,0 +1,27 @@
+<h1>Auctions</h1>
+
+<%# create a simple list of auction names with their cities %>
+<table id="simpleAuctionListing">
+  <thead>
+    <tr>
+      <th>Auction name</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% auctions.each do |auction| %>            <%# loop through the auctions and display their name with associated citiers %>
+      <tr>
+        <td><strong><%= link_to auction["auction name"], auction, remote: true %></strong>       
+          <% auction.auction_locations.each do |location| %>
+            <%= location.address.city %>
+          <% end %>
+        
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+

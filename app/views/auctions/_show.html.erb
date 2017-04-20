@@ -1,0 +1,84 @@
+
+<%# 
+    partial used for listing out the single Auction details in a more stylized format 
+    input variables:
+                    auction: expects to be set to single auction object that is to be displayed 
+%> 
+
+<div>
+  <div class="row">
+    <div class="col-xs-2 col-sm-2">
+      <strong>Auction name:</strong>
+    </div>
+    <div class="col-xs-2 col-sm-4">
+      <%= auction["auction name"] %>
+    </div>
+  </div>
+       
+  <div class="row">
+    <div class="col-xs-2 col-sm-2">
+        <strong>City:</strong>
+    </div>
+    <div class="col-xs-2 col-sm-4">
+          <% auction.auction_locations.each do |location| %>
+            <%= location.address.city %>
+          <% end %>
+    </div>
+  </div>
+       
+  <div class="row">
+    <div class="col-xs-2 col-sm-2">
+        <strong>Vehicles Sold:</strong>
+    </div>
+    <div class="col-xs-2 col-sm-4">
+        <%= auction.stock.count %>                                      <%#count the total number of vehicles sold by this auction %>
+    </div>
+  </div>
+       
+  <div class="row">
+    <div class="col-xs-2 col-sm-2">
+        <strong>Total Auction Profit:</strong>
+    </div>
+    <div class="col-xs-2 col-sm-4">
+        <%= number_to_currency(auction.bids.sum(:profit)) %>            <%# sum up the total profit for the auction and display in proper format %> 
+    </div>
+  </div>
+       
+  <div class="row">
+    <div class="col-xs-2 col-sm-2">
+        <strong>Average Profit/Car:</strong>
+    </div>
+    <div class="col-xs-2 col-sm-4">
+        <%= number_to_currency(auction.bids.average(:profit)) %>        <%# calc average profit per car for auction and display in proper format %>
+    </div>
+  </div>
+       
+  <br>
+   
+  <%# list out all the stock for this auction in a stylized table %> 
+  <h3>Stock</h3>
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th class="col-sm-1 ">Stock #</th>
+        <th class="col-sm-1 ">Year</th>
+        <th class="col-sm-1 ">Make</th>
+        <th class="col-sm-2 ">Model</th>
+        <th class="col-sm-2 ">Profit</th>
+        <th class="col-sm-5 ">Description</th>
+      </tr>
+    </thead>
+      <tbody>
+        <% auction.stock.each do |curStock| %>          <%# loop through the stock associated with this auction and display relevant information %>   
+          <tr>
+            <td><%= curStock['vehicle stock number'] %></td>
+            <td><%= curStock.vehicle['vehicle year'] %></td>
+            <td><%= curStock.vehicle['vehicle make'] %></td>
+            <td><%= curStock.vehicle['vehicle model'] %></td>
+            <td><%= number_to_currency(curStock.bid.profit) %></td>
+            <td><%= curStock.description %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+</div>

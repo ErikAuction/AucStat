@@ -1,0 +1,48 @@
+<%# 
+    partial used for displaying all of the needed stats for all auctions 
+    input variables:
+                    auctions: expects to be set to array of auctions that are to be displayed 
+%> 
+
+<h1>Auctions</h1>
+
+<div class="text-center">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th class="col-sm-3 text-center">Auction name</th>
+        <th class="col-sm-3 text-center">Auction city</th>
+        <th class="col-sm-2 text-center">Vehicles Sold</th>
+        <th class="col-sm-2 text-center">Total Profit</th>
+        <th class="col-sm-2 text-center">Average Profit per Car</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% auctions.each do |auction| %>                                    <%# loop through each of the auctions and display the pertinent stats in the table %>
+        <tr>
+          <td><%= link_to auction["auction name"], auction, remote: true %></td>
+          <td>
+            <% auction.auction_locations.each do |location| %>
+              <%= location.address.city %>
+            <% end %>
+          </td>
+          <td>
+            <%= auction.stock.count %>
+          </td>
+          <td>
+            <%= number_to_currency(auction.bids.sum(:profit)) %>          <%# sum up the total profit for the auction and display in proper format %>      
+          </td>
+          <td>
+            <%= number_to_currency(auction.bids.average(:profit)) %>      <%# calc average profit per car for auction and display in proper format %>
+          </td>
+
+
+            
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+<br>
+

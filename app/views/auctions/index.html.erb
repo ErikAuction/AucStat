@@ -1,0 +1,21 @@
+<p id="notice"><%= notice %></p>
+
+<div class="container-fluid ">
+
+
+  <% if @auctions.count > 0 %>
+  <div id="auction_listings">
+    <%= render partial: "auctions/auctions", locals: {auctions: @auctions}  %>
+  </div>
+
+
+
+  <div class="jumbotron" id="detail_view"> 
+    <h3> Click auction name for more detail </h3>
+    <h3> Click 'All Stats' in menu for complete listing </h3>
+  </div>
+
+  <% end %>
+</div>
+
+
