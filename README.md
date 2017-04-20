@@ -32,8 +32,9 @@ browse to http://localhost:3000
 ```
 
 ## Usage
-  After loading webpage, click on the "choose file" button to select a CSV file to import, and choose "Import CSV" to import the file
-  example-data.csv has been provided in the root directory 
+  After loading webpage, click on the "choose file" button to select a CSV file to import, and choose "Import CSV" to import the file.
+  
+  example-data.csv has been provided in the root directory for simple testing and layout purposes.
   
   Once the file has been imported, a simple auction listing with city name should be displayed.
   Clicking on any one of the auction names will bring up a detail pane for that auction 
