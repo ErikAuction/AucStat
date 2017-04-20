@@ -18,7 +18,7 @@ The Rails gem – version 5.0
 
 ```
 git clone https://github.com/ErikAuction/AucStat.git
-cd AucStat
+cd aucStat
 bundle
 rake db:schema:load
 ```
